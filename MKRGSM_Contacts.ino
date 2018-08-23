@@ -23,7 +23,7 @@ String doAT(const char *  s) {
 }
 void addCONTACT(char* number, char * name){
   int contactid = 0; 
-  contactid = _interface(printNULL,number,-1);
+  contactid = _interface(printNULL,number,-1); //also refreshes between subsequent addCONTACT calls
   if(contactid == 0) {
     //didnt find number in phonebook
     updateCONTACT(lastId,number,name);
