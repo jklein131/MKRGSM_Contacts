@@ -1,5 +1,7 @@
 # MKRGSM_Contacts
-A example script for how to interface with the MKR GSM 1400 Sim card phonebook memory. 
+A collection of functions to interface with the MKR GSM 1400 Sim card phonebook memory. Not optomized. 
+
+Basic Usage in main loop 
 
 
 Thanks to:<br>
