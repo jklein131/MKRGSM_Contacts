@@ -35,16 +35,21 @@ String doAT(const char *  s) {
   MODEM.waitForResponse(500, &test);
   return test;
 }
-void addCONTACT(){
-  //see if contact exists first
-  //find last number in contact list, or first null contact, if over 250 then two bad you're out of contacts.
-  Serial.print(_first_null_contact_index());
+void addCONTACT(char* number, char * name){
+  int contactid = 0; 
+  contactid = _interface(printNULL,number,-1);
+  if(contactid == 0) {
+    //didnt find number in phonebook
+    updateCONTACT(lastId,number,name);
+
+  }
+  return;
 }
 void removeCONTACT(const char * phonenumber){
   //write contact at ID position
   int delId = 0;
   delId = _interface(printNULL,phonenumber,-1);
-  Serial.print(delId);
+  //Serial.print(delId);
   if(delId == 0) {
     //no number matches do nothing 
     return;
@@ -83,9 +88,6 @@ void updateCONTACT(int id, char* number, char * name){
   strcat(cmd1,"\"");
   doAT(cmd1);
 }
-int _first_null_contact_index(){
-  return _interface(printNULL,"",-1);
-}
 void printCONTACTS(){
   _interface(printSerial,"all",-1); //since its checking against a number, a character string will block aka "all"
 }
@@ -116,8 +118,16 @@ int _interface(void (*f)(const char * str),const char * numberbreak,int idbreak)
   while (pch != NULL)
   {
     if(colpos == 1){
+      if(myId > lastId +1){
+        //haha I know its a waste but helps me visualize
+        lastId = lastId;
+      } else {
+        lastId = myId;
+      }
       myId = atoi(pch);
-      lastId = myId;
+      if(!((myId - lastId) > 1)){
+        lastId = myId;
+      }
       colpos++;
     }
     else if(colpos == 2){
@@ -165,7 +175,11 @@ int _interface(void (*f)(const char * str),const char * numberbreak,int idbreak)
   contactbuf[0] = '\0';
   myNumber[0] = '\0';
   myName[0] = '\0';
-  lastId = myId;
+  if(myId == lastId){
+        lastId = myId +1;
+    } else {
+      lastId+=1;
+    }
   myId = 0;
   return myId;
 }
@@ -206,12 +220,22 @@ void setup() {
   
   Serial.println("current contacts");
   printCONTACTS();
-  Serial.println("add contact 1");
+  Serial.println("change contact 1");
+  
   updateCONTACT(1,"+12345678910","test");
   printCONTACTS();
+  
   Serial.println("delete contact 1");
   removeCONTACT("+12345678910");
   printCONTACTS();
+  
+  Serial.println("add new");
+  addCONTACT("+66666666666","Devil");
+  addCONTACT("+69696969696","Meme");
+  printCONTACTS();
+  removeCONTACT("+66666666666");
+  removeCONTACT("+69696969696");
+  
   Serial.println("restore phonebook #1");
   updateCONTACT(1,exportnum,exportname);
   printCONTACTS();
