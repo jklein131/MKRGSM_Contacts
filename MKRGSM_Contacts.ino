@@ -14,20 +14,6 @@ char myName[sizer];
 int myId; 
 int lastId = 0;
 char contactbuf[sizer*2];
-void startAT(){
-    // reset the ublox module
-  delay(5); //give hardware time to settle 
-  pinMode(GSM_RESETN, OUTPUT);
-  digitalWrite(GSM_RESETN, HIGH);
-  delay(100);
-  digitalWrite(GSM_RESETN, LOW);
-  SerialGSM.begin(baud);
-  Serial.begin(baud);
-  delay(100);
-  contactbuf[0] = '\0';
-  myNumber[0] = '\0';
-  myName[0] = '\0';
-}
 String doAT(const char *  s) {
   String test;
   test.reserve(15);
