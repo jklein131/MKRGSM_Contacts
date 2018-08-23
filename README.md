@@ -1,5 +1,5 @@
 # MKRGSM_Contacts
-A collection of functions to interface with the MKR GSM 1400 Sim card phonebook memory. Not optomized. 
+A collection of functions to interface with the MKR GSM 1400 Sim card phonebook memory. Not optimized. 
 
 Basic Usage in main loop 
 
