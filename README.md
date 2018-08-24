@@ -1,5 +1,5 @@
 # MKRGSM_Contacts
-A collection of functions to interface with the MKR GSM 1400 Sim card phonebook/contact memory. Not optimized. 
+A collection of functions to interface with the ARDUINO MKR GSM 1400 Sim card phonebook/contact memory. Not optimized. 
 
 Basic Usage in main loop 
 
