@@ -7,13 +7,13 @@ boolean gsmconnected; // connection state
 //SIM INFO 
 unsigned long baud = 115200; 
 const int timeout = 5000; // in milli seconds
-const int sizer = 200; //i just made up this number
+const int sizer = 20; //i just made up this number
 const int maxcontacts = 250;
 char myNumber[20];
-char myName[sizer];
+char myName[20];
 int myId; 
 int lastId = 0;
-char contactbuf[sizer*2];
+char contactbuf[sizer*2*maxcontacts];
 String doAT(const char *  s) {
   String test;
   test.reserve(15);
